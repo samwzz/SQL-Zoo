@@ -217,7 +217,14 @@ def start_at_craiglockhart
     JOIN
       stops AS end_route_stops ON (end_routes.stop_id = end_route_stops.id)
     WHERE
-      end_route_stops.name = 'Craiglockhart'
+      start_routes.stop_id = (
+        SELECT
+          stops.id
+        FROM
+          stops
+        WHERE
+          stops.name = 'Craiglockhart'
+      )
   SQL
 end
 
